@@ -13,14 +13,14 @@ module.exports = () => {
       install: './src/js/install.js'
     },
     output: {
-      filename: '[name].bundle.js',
+      filename: '[name]bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
       // Generating an HTML file from a template
       new HtmlWebpackPlugin({
         template: './src/index.html',
-        filename: 'index.html',
+        title: 'Text-Editor',
       }),
       // Generating a manifest file for the PWA
       new WebpackPwaManifest({
