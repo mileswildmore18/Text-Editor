@@ -37,6 +37,7 @@ module.exports = () => {
         display: 'standalone',
         icons: [
           {
+            //Creating the logo image into the assets folder from its source
             src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
