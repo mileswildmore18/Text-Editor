@@ -31,7 +31,11 @@ warmStrategyCache({
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // Gives Asset cache configuration for CSS, JS, and Images
-const assetCache = new StaleWhileRevalidate({
+
+// This registers the route for CSS, JS, and Images
+registerRoute(
+  ({ request }) => ['style','script', 'image'].includes(request.destination),
+   new StaleWhileRevalidate({
   cacheName: 'asset-cache',
   plugins: [
     new CacheableResponsePlugin({
@@ -42,13 +46,6 @@ const assetCache = new StaleWhileRevalidate({
       maxEntires: 60, // 60 = Maximum number of entries to cache
     }),
   ],
-});
-
-// This registers the route for CSS, JS, and Images
-registerRoute(
-  ({ request }) =>
-    request.destination === 'style' ||
-    request.destination === 'script' ||
-    request.destination === 'image',
-  assetCache
-);
+}),
+  
+)
