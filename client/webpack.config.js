@@ -47,7 +47,7 @@ module.exports = () => {
       //Injecting the custom service worker
       new InjectManifest({
         swSrc: './src-sw.js',
-        swDest: 'service-worker.js'
+        swDest: 'src-sw.js'
       })
     ],
 
@@ -56,25 +56,21 @@ module.exports = () => {
       rules: [
         //Rule for JavaScript files
         {
-          test: /\.js/,
+          //Rule for caching the style
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             },
           },
         },
-        //Rule for CSS files
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
-        },
-        {
-          //Adding the image paths rules to be compatible
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/resource',
-          },
       ],
     },
   };
