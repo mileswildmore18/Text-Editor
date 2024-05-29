@@ -24,18 +24,21 @@ module.exports = () => {
       }),
       // Generating a manifest file for the PWA
       new WebpackPwaManifest({
+        inject: true,
+        fingerprints: false,
         name: 'My Progressive Web App',
         short_name: 'MyPWA',
         description: 'My awesome Progressive Web App!',
         background_color: '#ffffff',
         theme_color: '#ffffff',
         start_url: '/',
+        publicPath: '/',
         display: 'standalone',
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
-            destination: path.join('images', 'logo'),
+            destination: path.join('assets', 'icons'),
           },
         ],
       }),
@@ -65,7 +68,11 @@ module.exports = () => {
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
-        }
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
+          },
       ],
     },
   };
