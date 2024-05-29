@@ -12,6 +12,7 @@ module.exports = () => {
       main: './src/js/index.js',
       install: './src/js/install.js'
     },
+    //Creating the destination folder of the file
     output: {
       filename: '[name]bundle.js',
       path: path.resolve(__dirname, 'dist'),
@@ -70,6 +71,7 @@ module.exports = () => {
           use: ['style-loader', 'css-loader'],
         },
         {
+          //Adding the image paths rules to be compatible
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/resource',
           },
